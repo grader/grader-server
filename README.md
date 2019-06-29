@@ -1,2 +1,2 @@
 # grader-server
-Artificial intelligence grade paper
+Artificial intelligence grade server
