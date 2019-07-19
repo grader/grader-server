@@ -97,6 +97,49 @@ module.exports = {
           content: 'This is a seeded Article for the development environment'
         }
       }]
+    }, {
+      model: 'QuestTemplate',
+      options: { logResults: true },
+      skip: {
+        when: {} // Mongoose qualified query
+      },
+      docs: [{
+        data: {
+          "isDefault": true,
+          "subject": "English",
+          "type": "ListenChoose",
+          "title": "听力选择",
+          "description": "听力选择",
+          "questionNumber": 0
+        }
+      },{
+        data: {
+          "isDefault": true,
+          "subject": "English",
+          "type": "BlankReadingChoose",
+          "title": "短文选择填空",
+          "description": "听力短文选择填空",
+          "questionNumber": 10
+        }
+      }
+      ]
+    }, {
+      model: 'Subject',
+      options: { logResults: true },
+      skip: {
+        when: {} // Mongoose qualified query
+      },
+      docs: [
+        {data: { name: "语文", isDefault: true, subjectCode: "chinese"}},
+        {data: { name: "数学", isDefault: true, subjectCode: "mathematics"}},
+        {data: { name: "英语", isDefault: true, subjectCode: "english"}},
+        {data: { name: "物理", isDefault: true, subjectCode: "physical"}},
+        {data: { name: "化学", isDefault: true, subjectCode: "chemistry"}},
+        {data: { name: "生物", isDefault: true, subjectCode: "biological"}},
+        {data: { name: "地理", isDefault: true, subjectCode: "geography"}},
+        {data: { name: "政治", isDefault: true, subjectCode: "political"}},
+        {data: { name: "历史", isDefault: true, subjectCode: "history"}},
+      ]
     }]
   }
 };
