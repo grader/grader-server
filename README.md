@@ -9,7 +9,7 @@ Make sure you have installed all of the following prerequisites on your developm
 
 
 ## Quick Install
-Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop your NodeApp application.
+Once you've downloaded the boilerplate and installed all the prerequisites, you're just a few steps away from starting to develop your application.
 
 The boilerplate comes pre-bundled with a `package.json` files that contain the list of modules you need to start your application.
 
@@ -34,8 +34,7 @@ $ npm start
 
 Your application should run on port 3000 with the *development* environment configuration
 
-That's it! Your application should be running. To proceed with your development, check the other sections in this documentation.
-If you encounter any problems, try the Troubleshooting section.
+That's it! Your application should be running. 
 
 Explore `config/env/development.js` for development environment configuration options.
 
