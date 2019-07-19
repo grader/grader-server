@@ -94,6 +94,19 @@ module.exports.initJwtToken = function (app) {
     }
   });
 };
+module.exports.initCsrf = function (app){
+  app.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    if (req.method == 'OPTIONS') {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+  });
+};
 
 /**
  * Invoke modules server configuration
@@ -180,6 +193,7 @@ module.exports.init = function (db) {
   // Initialize Express json web token
   this.initJwtToken(app);
 
+  this.initCsrf(app);
   // Initialize Modules configuration
   this.initModulesConfiguration(app);
 
