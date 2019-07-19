@@ -34,7 +34,7 @@ $ npm start
 
 Your application should run on port 3000 with the *development* environment configuration
 
-That's it! Your application should be running. 
+That's it! Your application should be running.
 
 Explore `config/env/development.js` for development environment configuration options.
 
