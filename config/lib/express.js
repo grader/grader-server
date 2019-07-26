@@ -94,6 +94,11 @@ module.exports.initJwtToken = function (app) {
     }
   });
 };
+
+/**
+ * should delete at production deployment or have a CI environment
+ * @param app
+ */
 module.exports.initCsrf = function (app){
   app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
