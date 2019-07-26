@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var papersPolicy = require('../policies/papers.server.policy'),
+const papersPolicy = require('../policies/papers.server.policy'),
   papers = require('../controllers/papers.server.controller');
 
 module.exports = function(app) {

@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var path = require('path'),
+const path = require('path'),
   mongoose = require('mongoose'),
   Subject = mongoose.model('Subject'),
   errorHandler = require(path.resolve('./modules/core/controllers/errors.server.controller')),
@@ -13,7 +13,7 @@ var path = require('path'),
  * Create a Subject
  */
 exports.create = function(req, res) {
-  var subject = new Subject(req.body);
+  const subject = new Subject(req.body);
   subject.user = req.user;
 
   subject.save(function(err) {
@@ -32,7 +32,7 @@ exports.create = function(req, res) {
  */
 exports.read = function(req, res) {
   // convert mongoose document to JSON
-  var subject = req.subject ? req.subject.toJSON() : {};
+  const subject = req.subject ? req.subject.toJSON() : {};
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
@@ -45,7 +45,7 @@ exports.read = function(req, res) {
  * Update a Subject
  */
 exports.update = function(req, res) {
-  var subject = req.subject;
+  const subject = req.subject;
 
   subject = _.extend(subject, req.body);
 
@@ -64,7 +64,7 @@ exports.update = function(req, res) {
  * Delete an Subject
  */
 exports.delete = function(req, res) {
-  var subject = req.subject;
+  const subject = req.subject;
 
   subject.remove(function(err) {
     if (err) {

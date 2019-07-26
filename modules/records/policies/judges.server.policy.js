@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var acl = require('acl');
+let acl = require('acl');
 
 // Using the memory backend
 acl = new acl(new acl.memoryBackend());

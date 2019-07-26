@@ -17,7 +17,7 @@ const getGlobbedPaths = function (globPatterns, excludes) {
   const urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
 
   // The output array
-  var output = [];
+  let output = [];
 
   // If glob pattern is array then we use each pattern in a recursive way, otherwise we use glob
   if (_.isArray(globPatterns)) {
@@ -28,11 +28,11 @@ const getGlobbedPaths = function (globPatterns, excludes) {
     if (urlRegex.test(globPatterns)) {
       output.push(globPatterns);
     } else {
-      var files = glob.sync(globPatterns);
+      let files = glob.sync(globPatterns);
       if (excludes) {
         files = files.map(function (file) {
           if (_.isArray(excludes)) {
-            for (var i in excludes) {
+            for (const i in excludes) {
               if (excludes.hasOwnProperty(i)) {
                 file = file.replace(excludes[i], '');
               }
@@ -54,7 +54,7 @@ const getGlobbedPaths = function (globPatterns, excludes) {
  * Validate NODE_ENV existence
  */
 const validateEnvironmentVariable = function () {
-  var environmentFiles = glob.sync('./config/env/' + process.env.NODE_ENV + '.js');
+  const environmentFiles = glob.sync('./config/env/' + process.env.NODE_ENV + '.js');
   console.log();
   if (!environmentFiles.length) {
     if (process.env.NODE_ENV) {

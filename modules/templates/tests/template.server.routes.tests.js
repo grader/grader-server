@@ -1,6 +1,6 @@
 'use strict';
 
-var should = require('should'),
+const should = require('should'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
@@ -11,7 +11,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var app,
+const app,
   agent,
   credentials,
   user,
@@ -69,7 +69,7 @@ describe('Template CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Template
         agent.post('/api/templates')
@@ -90,7 +90,7 @@ describe('Template CRUD tests', function () {
                 }
 
                 // Get Templates list
-                var templates = templatesGetRes.body;
+                const templates = templatesGetRes.body;
 
                 // Set assertions
                 (templates[0].user._id).should.equal(userId);
@@ -127,7 +127,7 @@ describe('Template CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Template
         agent.post('/api/templates')
@@ -154,7 +154,7 @@ describe('Template CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Template
         agent.post('/api/templates')
@@ -192,7 +192,7 @@ describe('Template CRUD tests', function () {
 
   it('should be able to get a list of Templates if not signed in', function (done) {
     // Create new Template model instance
-    var templateObj = new Template(template);
+    const templateObj = new Template(template);
 
     // Save the template
     templateObj.save(function () {
@@ -211,7 +211,7 @@ describe('Template CRUD tests', function () {
 
   it('should be able to get a single Template if not signed in', function (done) {
     // Create new Template model instance
-    var templateObj = new Template(template);
+    const templateObj = new Template(template);
 
     // Save the Template
     templateObj.save(function () {
@@ -261,7 +261,7 @@ describe('Template CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Template
         agent.post('/api/templates')
@@ -298,7 +298,7 @@ describe('Template CRUD tests', function () {
     template.user = user;
 
     // Create new Template model instance
-    var templateObj = new Template(template);
+    const templateObj = new Template(template);
 
     // Save the Template
     templateObj.save(function () {
@@ -318,13 +318,13 @@ describe('Template CRUD tests', function () {
 
   it('should be able to get a single Template that has an orphaned user reference', function (done) {
     // Create orphan user creds
-    var _creds = {
+    const _creds = {
       username: 'orphan',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
     // Create orphan user
-    var _orphan = new User({
+    const _orphan = new User({
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
@@ -350,7 +350,7 @@ describe('Template CRUD tests', function () {
           }
 
           // Get the userId
-          var orphanId = orphan._id;
+          const orphanId = orphan._id;
 
           // Save a new Template
           agent.post('/api/templates')

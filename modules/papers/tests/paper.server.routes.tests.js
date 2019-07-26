@@ -1,6 +1,6 @@
 'use strict';
 
-var should = require('should'),
+const should = require('should'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
@@ -11,7 +11,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var app,
+let app,
   agent,
   credentials,
   user,
@@ -69,7 +69,7 @@ describe('Paper CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        let userId = user.id;
 
         // Save a new Paper
         agent.post('/api/papers')
@@ -90,7 +90,7 @@ describe('Paper CRUD tests', function () {
                 }
 
                 // Get Papers list
-                var papers = papersGetRes.body;
+                const papers = papersGetRes.body;
 
                 // Set assertions
                 (papers[0].user._id).should.equal(userId);
@@ -127,7 +127,7 @@ describe('Paper CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Paper
         agent.post('/api/papers')
@@ -154,7 +154,7 @@ describe('Paper CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        let userId = user.id;
 
         // Save a new Paper
         agent.post('/api/papers')
@@ -192,7 +192,7 @@ describe('Paper CRUD tests', function () {
 
   it('should be able to get a list of Papers if not signed in', function (done) {
     // Create new Paper model instance
-    var paperObj = new Paper(paper);
+    let paperObj = new Paper(paper);
 
     // Save the paper
     paperObj.save(function () {
@@ -211,7 +211,7 @@ describe('Paper CRUD tests', function () {
 
   it('should be able to get a single Paper if not signed in', function (done) {
     // Create new Paper model instance
-    var paperObj = new Paper(paper);
+    const paperObj = new Paper(paper);
 
     // Save the Paper
     paperObj.save(function () {
@@ -261,7 +261,7 @@ describe('Paper CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Paper
         agent.post('/api/papers')
@@ -298,7 +298,7 @@ describe('Paper CRUD tests', function () {
     paper.user = user;
 
     // Create new Paper model instance
-    var paperObj = new Paper(paper);
+    const paperObj = new Paper(paper);
 
     // Save the Paper
     paperObj.save(function () {
@@ -318,13 +318,13 @@ describe('Paper CRUD tests', function () {
 
   it('should be able to get a single Paper that has an orphaned user reference', function (done) {
     // Create orphan user creds
-    var _creds = {
+    const _creds = {
       username: 'orphan',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
     // Create orphan user
-    var _orphan = new User({
+    const _orphan = new User({
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
@@ -350,7 +350,7 @@ describe('Paper CRUD tests', function () {
           }
 
           // Get the userId
-          var orphanId = orphan._id;
+          const orphanId = orphan._id;
 
           // Save a new Paper
           agent.post('/api/papers')

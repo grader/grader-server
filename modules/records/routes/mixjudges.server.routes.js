@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var mixjudgesPolicy = require('../policies/mixjudges.server.policy'),
+const mixjudgesPolicy = require('../policies/mixjudges.server.policy'),
   mixjudges = require('../controllers/mixjudges.server.controller');
 
 module.exports = function(app) {

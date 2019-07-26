@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var passport = require('passport'),
+const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   User = require('mongoose').model('User');
 

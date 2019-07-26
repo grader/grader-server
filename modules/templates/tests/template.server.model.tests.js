@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var should = require('should'),
+const should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   Template = mongoose.model('Template');
@@ -11,7 +11,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var user,
+const user,
   template;
 
 /**

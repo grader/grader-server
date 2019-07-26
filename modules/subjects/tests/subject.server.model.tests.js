@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var should = require('should'),
+const should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   Subject = mongoose.model('Subject');

@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var path = require('path'),
+const path = require('path'),
   mongoose = require('mongoose'),
   Template = mongoose.model('Template'),
   errorHandler = require(path.resolve('./modules/core/controllers/errors.server.controller')),
@@ -13,7 +13,7 @@ var path = require('path'),
  * Create a Template
  */
 exports.create = function(req, res) {
-  var template = new Template(req.body);
+  const template = new Template(req.body);
   template.user = req.user;
 
   template.save(function(err) {
@@ -32,7 +32,7 @@ exports.create = function(req, res) {
  */
 exports.read = function(req, res) {
   // convert mongoose document to JSON
-  var template = req.template ? req.template.toJSON() : {};
+  const template = req.template ? req.template.toJSON() : {};
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
@@ -45,7 +45,7 @@ exports.read = function(req, res) {
  * Update a Template
  */
 exports.update = function(req, res) {
-  var template = req.template;
+  const template = req.template;
 
   template = _.extend(template, req.body);
 
@@ -64,7 +64,7 @@ exports.update = function(req, res) {
  * Delete an Template
  */
 exports.delete = function(req, res) {
-  var template = req.template;
+  const template = req.template;
 
   template.remove(function(err) {
     if (err) {

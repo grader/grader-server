@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var path = require('path'),
+const path = require('path'),
   mongoose = require('mongoose'),
   Promise = require('promise'),
   Paper = mongoose.model('Paper'),
@@ -22,28 +22,28 @@ var path = require('path'),
  * Create a Paper
  */
 exports.create = function(req, res) {
-  var template = req.body;
-  var paper = new Paper();
+  let template = req.body;
+  let paper = new Paper();
   paper.title = template.title;
   paper.subject = template.subject;
   paper.user = req.user;
 
-  var paperStructs = template.paperStructs;
+  let paperStructs = template.paperStructs;
 
-  var questions = [];
-  var queryPromises = [];
+  let questions = [];
+  let queryPromises = [];
 
-  var subjectId = mongoose.Types.ObjectId(template.subject);
-  var query = {subject: subjectId,
+  let subjectId = mongoose.Types.ObjectId(template.subject);
+  let query = {subject: subjectId,
     random: {$near: [Math.random().toFixed(2), Math.random().toFixed(2)]}
   };
 
-  for(var index in paperStructs) {
-    var questsSet = paperStructs[index];
+  for(let index in paperStructs) {
+    let questsSet = paperStructs[index];
 
-    var difficulty = parseFloat(questsSet.difficulty);
+    let difficulty = parseFloat(questsSet.difficulty);
     query.difficulty = {$gte: difficulty-1, $lte: difficulty+1};
-    var tags = questsSet.tags;
+    let tags = questsSet.tags;
 
     if (tags.length >  0){
       query.tags = {"$all": tags};
@@ -65,8 +65,8 @@ exports.create = function(req, res) {
   }
 
   Promise.all(queryPromises).then(function(values) {
-    for(var index in paperStructs) {
-      var questsSet = paperStructs[index];
+    for(const index in paperStructs) {
+      const questsSet = paperStructs[index];
       questsSet.questions = values[index];
       questions.push(questsSet);
     }
@@ -91,7 +91,7 @@ exports.create = function(req, res) {
  */
 exports.read = function(req, res) {
   // convert mongoose document to JSON
-  var paper = req.paper ? req.paper.toJSON() : {};
+  let paper = req.paper ? req.paper.toJSON() : {};
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
@@ -104,7 +104,7 @@ exports.read = function(req, res) {
  * Update a Paper
  */
 exports.update = function(req, res) {
-  var paper = req.paper;
+  const paper = req.paper;
 
   paper = _.extend(paper, req.body);
 
@@ -123,7 +123,7 @@ exports.update = function(req, res) {
  * Delete an Paper
  */
 exports.delete = function(req, res) {
-  var paper = req.paper;
+  const paper = req.paper;
 
   paper.remove(function(err) {
     if (err) {

@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var tagsPolicy = require('../policies/tags.server.policy'),
+const tagsPolicy = require('../policies/tags.server.policy'),
   tags = require('../controllers/tags.server.controller');
 
 module.exports = function(app) {

@@ -3,13 +3,13 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
  * Paper Schema
  */
-var PaperSchema = new Schema({
+const PaperSchema = new Schema({
   title: {
     type: String,
     required: 'Please fill Paper title',

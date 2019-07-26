@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var path = require('path'),
+const path = require('path'),
   mongoose = require('mongoose'),
   Tag = mongoose.model('Tag'),
   url = require('url'),
@@ -14,7 +14,7 @@ var path = require('path'),
  * Create a Tag
  */
 exports.create = function(req, res) {
-  var tag = new Tag(req.body);
+  const tag = new Tag(req.body);
   tag.user = req.user;
 
   tag.save(function(err) {
@@ -33,7 +33,7 @@ exports.create = function(req, res) {
  */
 exports.read = function(req, res) {
   // convert mongoose document to JSON
-  var tag = req.tag ? req.tag.toJSON() : {};
+  const tag = req.tag ? req.tag.toJSON() : {};
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
@@ -46,7 +46,7 @@ exports.read = function(req, res) {
  * Update a Tag
  */
 exports.update = function(req, res) {
-  var tag = req.tag;
+  let tag = req.tag;
 
   tag = _.extend(tag, req.body);
 
@@ -65,7 +65,7 @@ exports.update = function(req, res) {
  * Delete an Tag
  */
 exports.delete = function(req, res) {
-  var tag = req.tag;
+  const tag = req.tag;
 
   tag.remove(function(err) {
     if (err) {
@@ -82,11 +82,11 @@ exports.delete = function(req, res) {
  * List of Tags
  */
 exports.list = function(req, res) {
-  var queryParams = url.parse(req.url, true).query
-  var subjectId = mongoose.Types.ObjectId(queryParams.subjectId);
-  var shared = queryParams.shared;
+  const queryParams = url.parse(req.url, true).query
+  const subjectId = mongoose.Types.ObjectId(queryParams.subjectId);
+  const shared = queryParams.shared;
 
-  var query;
+  let query;
   if (subjectId && shared==='true')
     query = {"$or": [{subject: subjectId}, {subject: null}]};
   else if(subjectId)

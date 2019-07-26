@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var templatesPolicy = require('../policies/templates.server.policy'),
+const templatesPolicy = require('../policies/templates.server.policy'),
   templates = require('../controllers/templates.server.controller');
 
 module.exports = function(app) {

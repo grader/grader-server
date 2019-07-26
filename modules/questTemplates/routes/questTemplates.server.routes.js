@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var questTemplatesPolicy = require('../policies/questTemplates.server.policy'),
+const questTemplatesPolicy = require('../policies/questTemplates.server.policy'),
   questTemplates = require('../controllers/questTemplates.server.controller');
 
 module.exports = function (app) {

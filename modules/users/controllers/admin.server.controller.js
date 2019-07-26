@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var path = require('path'),
+const path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/controllers/errors.server.controller'));
@@ -19,7 +19,7 @@ exports.read = function (req, res) {
  * Update a User
  */
 exports.update = function (req, res) {
-  var user = req.model;
+  const user = req.model;
 
   // For security purposes only merge these parameters
   user.firstName = req.body.firstName;
@@ -42,7 +42,7 @@ exports.update = function (req, res) {
  * Delete a user
  */
 exports.delete = function (req, res) {
-  var user = req.model;
+  const user = req.model;
   if (user.roles.indexOf('Administrator') > 0){
     return res.status(403).send();
   }
@@ -62,7 +62,8 @@ exports.delete = function (req, res) {
  * List of Users
  */
 exports.list = function (req, res) {
-  User.find({}, '-salt -password -providerData').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+
+  User.paginate({}, '-salt -password -providerData').sort('-created').populate('user', 'displayName').exec(function (err, users) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)

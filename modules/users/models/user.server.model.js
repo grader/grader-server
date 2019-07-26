@@ -3,7 +3,8 @@
 /**
  * Module dependencies
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
+  mongoosePaginate = require('mongoose-paginate'),
   path = require('path'),
   config = require(path.resolve('./config/config')),
   Schema = mongoose.Schema,
@@ -19,14 +20,14 @@ owasp.config(config.shared.owasp);
 /**
  * A Validation function for local strategy properties
  */
-var validateLocalStrategyProperty = function (property) {
+const validateLocalStrategyProperty = function (property) {
   return ((this.provider !== 'local' && !this.updated) || property.length);
 };
 
 /**
  * A Validation function for local strategy email
  */
-var validateLocalStrategyEmail = function (email) {
+const validateLocalStrategyEmail = function (email) {
   return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, { require_tld: false }));
 };
 
@@ -40,8 +41,8 @@ var validateLocalStrategyEmail = function (email) {
  * - not begin or end with "."
  */
 
-var validateUsername = function (username) {
-  var usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
+const validateUsername = function (username) {
+  const usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
   return (
     this.provider !== 'local' ||
     (username && usernameRegex.test(username) && config.illegalUsernames.indexOf(username) < 0)
@@ -51,7 +52,7 @@ var validateUsername = function (username) {
 /**
  * User Schema
  */
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   firstName: {
     type: String,
     trim: true,
@@ -131,6 +132,8 @@ var UserSchema = new Schema({
   }
 });
 
+UserSchema.plugin(mongoosePaginate);
+
 /**
  * Hook a pre save method to hash the password
  */
@@ -148,9 +151,9 @@ UserSchema.pre('save', function (next) {
  */
 UserSchema.pre('validate', function (next) {
   if (this.provider === 'local' && this.password && this.isModified('password')) {
-    var result = owasp.test(this.password);
+    const result = owasp.test(this.password);
     if (result.errors.length) {
-      var error = result.errors.join(' ');
+      const error = result.errors.join(' ');
       this.invalidate('password', error);
     }
   }
@@ -180,8 +183,8 @@ UserSchema.methods.authenticate = function (password) {
  * Find possible not used username
  */
 UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
-  var _this = this;
-  var possibleUsername = username.toLowerCase() + (suffix || '');
+  const _this = this;
+  const possibleUsername = username.toLowerCase() + (suffix || '');
 
   _this.findOne({
     username: possibleUsername
@@ -205,8 +208,8 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 */
 UserSchema.statics.generateRandomPassphrase = function () {
   return new Promise(function (resolve, reject) {
-    var password = '';
-    var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
+    let password = '';
+    const repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
 
     // iterate until the we have a valid passphrase
     // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present
@@ -243,7 +246,7 @@ mongoose.model('User', UserSchema);
 * and provided options.
 */
 function seed(doc, options) {
-  var User = mongoose.model('User');
+  const User = mongoose.model('User');
 
   return new Promise(function (resolve, reject) {
 
@@ -299,7 +302,7 @@ function seed(doc, options) {
 
         User.generateRandomPassphrase()
           .then(function (passphrase) {
-            var user = new User(doc);
+            const user = new User(doc);
 
             user.provider = 'local';
             user.displayName = user.firstName + ' ' + user.lastName;

@@ -3,13 +3,13 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
  * Blank Schema
  */
-var BlankSchema = new Schema({
+const BlankSchema = new Schema({
   stem: {
     type: String,
     required: 'Please fill Singlechoice stem'

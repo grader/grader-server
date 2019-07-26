@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var mixquestanswersPolicy = require('../policies/mixquestanswers.server.policy'),
+const mixquestanswersPolicy = require('../policies/mixquestanswers.server.policy'),
   mixquestanswers = require('../controllers/mixquestanswers.server.controller');
 
 module.exports = function(app) {

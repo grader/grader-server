@@ -120,7 +120,7 @@ logger.getMorganOptions = function getMorganOptions() {
  * Returns the log.format option set in the current environment configuration
  */
 logger.getLogFormat = function getLogFormat() {
-  const format = config.log && config.log.format ? config.log.format.toString() : 'combined';
+  let format = config.log && config.log.format ? config.log.format.toString() : 'combined';
 
   // make sure we have a valid format
   if (!_.includes(validFormats, format)) {

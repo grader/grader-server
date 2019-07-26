@@ -3,13 +3,13 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
  * Tag Schema
  */
-var TagSchema = new Schema({
+const TagSchema = new Schema({
   name: {
     type: String,
     required: 'Please fill Tag name',

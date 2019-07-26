@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var mixsinglechoicesPolicy = require('../policies/mixsinglechoices.server.policy'),
+const mixsinglechoicesPolicy = require('../policies/mixsinglechoices.server.policy'),
   mixsinglechoices = require('../controllers/mixsinglechoices.server.controller');
 
 module.exports = function(app) {

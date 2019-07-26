@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var blanksPolicy = require('../policies/blanks.server.policy'),
+const blanksPolicy = require('../policies/blanks.server.policy'),
   blanks = require('../controllers/blanks.server.controller');
 
 module.exports = function(app) {

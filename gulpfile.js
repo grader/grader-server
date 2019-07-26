@@ -15,7 +15,7 @@ const _ = require('lodash'),
   semver = require('semver');
 
 // Local settings
-var changedTestFiles = [];
+const changedTestFiles = [];
 
 // Set NODE_ENV to 'test'
 gulp.task('env:test', function (done) {
@@ -37,7 +37,7 @@ gulp.task('env:prod', function (done) {
 gulp.task('nodemon', function (done) {
 
   // Node.js v7 and newer use different debug argument
-  var debugArgument = semver.satisfies(process.versions.node, '>=7.0.0') ? '--inspect' : '--debug';
+  const debugArgument = semver.satisfies(process.versions.node, '>=7.0.0') ? '--inspect' : '--debug';
 
   return plugins.nodemon({
     script: 'server.js',
@@ -87,7 +87,7 @@ gulp.task('watch:server:run-tests', function () {
     _.forEach(testAssets.tests.server, function (pattern) {
       // determine if the changed (watched) file is a server test
       _.forEach(glob.sync(pattern), function (f) {
-        var filePath = path.resolve(f);
+        const filePath = path.resolve(f);
 
         if (filePath === path.resolve(file.path)) {
           changedTestFiles.push(f);
@@ -100,7 +100,7 @@ gulp.task('watch:server:run-tests', function () {
 
 // ESLint JS linting task
 gulp.task('eslint', function () {
-  var assets = _.union(
+  const assets = _.union(
     defaultAssets.server.gulpConfig,
     defaultAssets.server.allJS,
     testAssets.tests.server
@@ -125,9 +125,9 @@ gulp.task('makeUploadsDir', function (done) {
 
 // Mocha tests task
 gulp.task('mocha', function (done) {
-  var mongooseService = require('./config/lib/mongoose');
-  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
-  var error;
+  const mongooseService = require('./config/lib/mongoose');
+  const testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
+  let error;
 
   // Connect mongoose
   mongooseService.connect(function (db) {
@@ -169,7 +169,7 @@ gulp.task('pre-test', function () {
 
 // Run istanbul test and write report
 gulp.task('mocha:coverage', gulp.series('pre-test', 'mocha', function () {
-  var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
+  const testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
 
   return gulp.src(testSuites)
     .pipe(plugins.istanbul.writeReports({
@@ -180,7 +180,7 @@ gulp.task('mocha:coverage', gulp.series('pre-test', 'mocha', function () {
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', function (done) {
   // Use mongoose configuration
-  var mongooseService = require('./config/lib/mongoose');
+  const mongooseService = require('./config/lib/mongoose');
 
   mongooseService.connect(function (db) {
     db.dropDatabase(function (err) {
@@ -197,8 +197,8 @@ gulp.task('dropdb', function (done) {
 
 // Seed Mongo database based on configuration
 gulp.task('mongo-seed', function (done) {
-  var db = require('./config/lib/mongoose');
-  var seed = require('./config/lib/mongo-seed');
+  const db = require('./config/lib/mongoose');
+  const seed = require('./config/lib/mongo-seed');
 
   // Open mongoose database connection
   db.connect(function () {

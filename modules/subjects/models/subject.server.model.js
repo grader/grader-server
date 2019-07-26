@@ -3,13 +3,13 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
  * Subject Schema
  */
-var SubjectSchema = new Schema({
+const SubjectSchema = new Schema({
   name: {
     type: String,
     required: 'Please fill Subject name'
@@ -34,7 +34,7 @@ SubjectSchema.statics.seed = seed;
 mongoose.model('Subject', SubjectSchema);
 
 function seed(doc, options) {
-  var Subject = mongoose.model('Subject');
+  const Subject = mongoose.model('Subject');
 
   return new Promise(function (resolve, reject) {
 
@@ -86,7 +86,7 @@ function seed(doc, options) {
           });
         }
 
-        var subject = new Subject(doc);
+        const subject = new Subject(doc);
 
         subject.save(function (err) {
           if (err) {

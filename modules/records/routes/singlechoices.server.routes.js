@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var singlechoicesPolicy = require('../policies/singlechoices.server.policy'),
+const singlechoicesPolicy = require('../policies/singlechoices.server.policy'),
   singlechoices = require('../controllers/singlechoices.server.controller');
 
 module.exports = function(app) {

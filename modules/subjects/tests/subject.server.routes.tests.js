@@ -1,6 +1,6 @@
 'use strict';
 
-var should = require('should'),
+const should = require('should'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
@@ -11,7 +11,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var app,
+const app,
   agent,
   credentials,
   user,
@@ -69,7 +69,7 @@ describe('Subject CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Subject
         agent.post('/api/subjects')
@@ -90,7 +90,7 @@ describe('Subject CRUD tests', function () {
                 }
 
                 // Get Subjects list
-                var subjects = subjectsGetRes.body;
+                const subjects = subjectsGetRes.body;
 
                 // Set assertions
                 (subjects[0].user._id).should.equal(userId);
@@ -127,7 +127,7 @@ describe('Subject CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Subject
         agent.post('/api/subjects')
@@ -154,7 +154,7 @@ describe('Subject CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Subject
         agent.post('/api/subjects')
@@ -192,7 +192,7 @@ describe('Subject CRUD tests', function () {
 
   it('should be able to get a list of Subjects if not signed in', function (done) {
     // Create new Subject model instance
-    var subjectObj = new Subject(subject);
+    const subjectObj = new Subject(subject);
 
     // Save the subject
     subjectObj.save(function () {
@@ -211,7 +211,7 @@ describe('Subject CRUD tests', function () {
 
   it('should be able to get a single Subject if not signed in', function (done) {
     // Create new Subject model instance
-    var subjectObj = new Subject(subject);
+    const subjectObj = new Subject(subject);
 
     // Save the Subject
     subjectObj.save(function () {
@@ -261,7 +261,7 @@ describe('Subject CRUD tests', function () {
         }
 
         // Get the userId
-        var userId = user.id;
+        const userId = user.id;
 
         // Save a new Subject
         agent.post('/api/subjects')
@@ -298,7 +298,7 @@ describe('Subject CRUD tests', function () {
     subject.user = user;
 
     // Create new Subject model instance
-    var subjectObj = new Subject(subject);
+    const subjectObj = new Subject(subject);
 
     // Save the Subject
     subjectObj.save(function () {
@@ -318,13 +318,13 @@ describe('Subject CRUD tests', function () {
 
   it('should be able to get a single Subject that has an orphaned user reference', function (done) {
     // Create orphan user creds
-    var _creds = {
+    const _creds = {
       username: 'orphan',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
     // Create orphan user
-    var _orphan = new User({
+    const _orphan = new User({
       firstName: 'Full',
       lastName: 'Name',
       displayName: 'Full Name',
@@ -350,7 +350,7 @@ describe('Subject CRUD tests', function () {
           }
 
           // Get the userId
-          var orphanId = orphan._id;
+          const orphanId = orphan._id;
 
           // Save a new Subject
           agent.post('/api/subjects')

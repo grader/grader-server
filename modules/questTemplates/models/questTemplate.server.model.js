@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   path = require('path'),
   config = require(path.resolve('./config/config')),
@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 /**
  * QuestTemplate Schema
  */
-var QuestTemplateSchema = new Schema({
+const QuestTemplateSchema = new Schema({
   isDefault : {
     type: Boolean,
     default: true,
@@ -56,7 +56,7 @@ mongoose.model('QuestTemplate', QuestTemplateSchema);
 * and provided options.
 */
 function seed(doc, options) {
-  var QuestTemplate = mongoose.model('QuestTemplate');
+  const QuestTemplate = mongoose.model('QuestTemplate');
 
   return new Promise(function (resolve, reject) {
 
@@ -71,7 +71,7 @@ function seed(doc, options) {
       });
 
     function findAdminUser(skip) {
-      var User = mongoose.model('User');
+      const User = mongoose.model('User');
 
       return new Promise(function (resolve, reject) {
         if (skip) {
@@ -134,7 +134,7 @@ function seed(doc, options) {
           });
         }
 
-        var questTemplate = new QuestTemplate(doc);
+        const questTemplate = new QuestTemplate(doc);
 
         questTemplate.save(function (err) {
           if (err) {

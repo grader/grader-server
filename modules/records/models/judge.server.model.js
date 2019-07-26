@@ -3,13 +3,13 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
  * Judge Schema
  */
-var JudgeSchema = new Schema({
+const JudgeSchema = new Schema({
   stem: {
     type: String,
     required: 'Please fill Judge stem'

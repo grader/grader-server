@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var subjectsPolicy = require('../policies/subjects.server.policy'),
+const subjectsPolicy = require('../policies/subjects.server.policy'),
   subjects = require('../controllers/subjects.server.controller');
 
 module.exports = function(app) {
