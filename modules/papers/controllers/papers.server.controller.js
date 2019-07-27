@@ -104,7 +104,7 @@ exports.read = function(req, res) {
  * Update a Paper
  */
 exports.update = function(req, res) {
-  const paper = req.paper;
+  let paper = req.paper;
 
   paper = _.extend(paper, req.body);
 

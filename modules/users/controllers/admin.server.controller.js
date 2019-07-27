@@ -62,14 +62,15 @@ exports.delete = function (req, res) {
  * List of Users
  */
 exports.list = function (req, res) {
-
-  User.paginate({}, '-salt -password -providerData').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+  let options = req.query;
+  options.page = options.page ? options.page : 1;
+  options.limit = options.limit? options.limit : 10;
+  User.paginate({}, options, function (err, users) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
-
     res.json(users);
   });
 };
