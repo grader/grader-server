@@ -15,6 +15,21 @@ exports.read = function (req, res) {
   res.json(req.model);
 };
 
+exports.add = function (req, res) {
+  var user = new User(req.body);
+  user.provider = 'local';
+  user.displayName = user.firstName + ' ' + user.lastName;
+  user.save(function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(user);
+    }
+  });
+};
+
 /**
  * Update a User
  */
@@ -35,6 +50,21 @@ exports.update = function (req, res) {
     }
 
     res.json(user);
+  });
+};
+
+/**
+ * batch delete users
+ */
+exports.batchDelete = function (req, res) {
+  const userIds = req.query.id;
+
+  User.deleteMany({ _id: { $in: userIds } }, function (err) {
+    if (err) {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
   });
 };
 
@@ -65,6 +95,7 @@ exports.list = function (req, res) {
   let options = req.query;
   options.page = options.page ? options.page : 1;
   options.limit = options.limit? options.limit : 10;
+  options.sort = '-created';
   User.paginate({}, options, function (err, users) {
     if (err) {
       return res.status(422).send({

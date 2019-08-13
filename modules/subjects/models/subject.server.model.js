@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 const mongoose = require('mongoose'),
+  mongoosePaginate = require('mongoose-paginate'),
   Schema = mongoose.Schema;
 
 /**
@@ -30,6 +31,9 @@ const SubjectSchema = new Schema({
     ref: 'User'
   }
 });
+
+SubjectSchema.plugin(mongoosePaginate);
+
 SubjectSchema.statics.seed = seed;
 mongoose.model('Subject', SubjectSchema);
 

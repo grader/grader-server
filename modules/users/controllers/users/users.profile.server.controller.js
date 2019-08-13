@@ -65,21 +65,6 @@ exports.update = function (req, res) {
     });
   }
 };
-exports.add = function (req, res) {
-  var user = new User(req.body);
-  user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
-  console.log(user)
-  user.save(function (err) {
-    if (err) {
-      return res.status(422).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(user);
-    }
-  });
-};
 
 /**
  * Update profile picture

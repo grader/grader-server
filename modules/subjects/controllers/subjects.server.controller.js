@@ -45,7 +45,7 @@ exports.read = function(req, res) {
  * Update a Subject
  */
 exports.update = function(req, res) {
-  const subject = req.subject;
+  let subject = req.subject;
 
   subject = _.extend(subject, req.body);
 
@@ -81,14 +81,18 @@ exports.delete = function(req, res) {
  * List of Subjects
  */
 exports.list = function(req, res) {
-  Subject.find().sort('-created').populate('user', 'displayName').exec(function(err, subjects) {
+
+  let options = req.query;
+  options.page = options.page ? options.page : 1;
+  options.limit = options.limit? options.limit : 10;
+  options.sort = '-created';
+  Subject.paginate({}, options, function (err, subjects) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
-    } else {
-      res.jsonp(subjects);
     }
+    res.json(subjects);
   });
 };
 
